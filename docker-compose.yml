@@ -1,0 +1,27 @@
+version: '3'
+services:
+  php:
+    build: ./php
+    environment:
+      MYSQL_HOST: $MYSQL_HOST
+      MYSQL_USER: $MYSQL_USER
+      MYSQL_PASSWORD: $MYSQL_PASSWORD
+      MYSQL_DB_NAME: $MYSQL_DB_NAME
+    volumes:
+      - ./app:/var/www/html
+      - ./php/php.ini:/usr/local/etc/php/php.ini
+    ports:
+      - 8080:80
+
+  mysql:
+    image: mysql:8.1
+    volumes:
+      - ./volumes/mysql:/var/lib/mysql
+    environment:
+      MYSQL_DATABASE: $MYSQL_DB_NAME
+      MYSQL_USER: $MYSQL_USER
+      MYSQL_PASSWORD: $MYSQL_PASSWORD
+      MYSQL_ROOT_PASSWORD: $MYSQL_ROOT_PASSWORD
+      TZ: "Asia/Tokyo"
+    ports:
+      - 3306:3306
