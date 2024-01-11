@@ -1,9 +1,6 @@
 <?php
 namespace App\Domain;
 
-require_once "{$_SERVER['DOCUMENT_ROOT']}/core/MySql.php";
-require_once "{$_SERVER['DOCUMENT_ROOT']}/model/Diary.php";
-
 use \App\Core\MySql;
 use \App\Model\Diary as DiaryModel;
 

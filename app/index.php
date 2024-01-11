@@ -1,7 +1,5 @@
 <?php
-require_once "{$_SERVER['DOCUMENT_ROOT']}/domain/Diary.php";
-require_once "{$_SERVER['DOCUMENT_ROOT']}/view/component/DiaryCard.php";
-require_once "{$_SERVER['DOCUMENT_ROOT']}/view/layout/Page.php";
+require_once "{$_SERVER['DOCUMENT_ROOT']}/vendor/autoload.php";
 
 use \App\Domain\Diary as DiaryDomain;
 use \App\View\Component\DiaryCard as DiaryCard;

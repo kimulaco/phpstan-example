@@ -1,5 +1,5 @@
 <?php
-require_once "{$_SERVER['DOCUMENT_ROOT']}/view/layout/Page.php";
+require_once "{$_SERVER['DOCUMENT_ROOT']}/vendor/autoload.php";
 
 use App\View\Layout\Page;
 ?>

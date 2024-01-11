@@ -1,8 +1,6 @@
 <?php
 namespace App\Core;
 
-require_once "{$_SERVER['DOCUMENT_ROOT']}/core/Env.php";
-
 use App\Core\Env;
 
 class MySql {
