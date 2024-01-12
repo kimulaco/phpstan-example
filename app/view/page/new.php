@@ -1,6 +1,4 @@
 <?php
-require_once "{$_SERVER['DOCUMENT_ROOT']}/vendor/autoload.php";
-
 use App\View\Layout\Page;
 ?>
 <? Page::renderDoctype(); ?>
@@ -59,14 +57,24 @@ use App\View\Layout\Page;
             form.addEventListener('submit', async (event) => {
                 event.preventDefault();
                 const values = getFormValues(event.target);
-                console.log(values);
 
-                const response = await fetch('/api/diary/new.php', {
+                const response = await fetch('/api/diary/new', {
                     method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(values),
                 })
                 const json = await response.json();
-                console.log(json);
+
+                try {
+                    if (json.statusCode !== 200) {
+                        throw new Error(json.message);
+                    }
+                    history.back();
+                } catch (error) {
+                    console.error(error);
+                    alert(error.message);
+                    return;
+                }
             });
         };
 

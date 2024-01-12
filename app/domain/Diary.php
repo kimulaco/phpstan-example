@@ -35,4 +35,51 @@ class Diary {
 
         return $diaries;
     }
+
+    public function add(array $data)
+    {
+        if (!$data['title']) {
+            throw new \Exception('Required title.');
+        }
+
+        if (!$data['content']) {
+            throw new \Exception('Required content.');
+        }
+
+        $mysql = new MySql();
+        $now = date('Y-m-d H:i:s');
+        $id = 0;
+
+        try {
+            $mysql->open();
+            $sql = <<<EOT
+                INSERT INTO diaries (title, created_at, updated_at, content)
+                VALUES (?, ?, ?, ?)
+            EOT;
+            $query = $mysql->pdo->prepare($sql);
+            $query->bindParam(1, $data['title']);
+            $query->bindParam(2, $now);
+            $query->bindParam(3, $now);
+            $query->bindParam(4, $data['content']);
+            $query->execute();
+            $id = $mysql->pdo->lastInsertId();
+            $mysql->close();
+        } catch (\Exception $error) {
+            $mysql->close();
+            http_response_code(500);
+            echo json_encode([
+                'statusCode' => 500,
+                'message' => $error->getMessage(),
+            ]);
+            return;
+        }
+
+        return [
+            'id' => $id,
+            'title' => $data['title'],
+            'created_at' => $now,
+            'updated_at' => $now,
+            'content' => $data['content'],
+        ];
+    }
 }
