@@ -1,0 +1,8 @@
+parameters:
+    level: 9
+    paths:
+        - "."
+    excludePaths:
+        - "vendor/*"
+    tmpDir: ".phpstan_cache"
+    editorUrl: 'vscode://file/%%file%%:%%line%%'

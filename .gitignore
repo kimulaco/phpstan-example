@@ -6,3 +6,7 @@ volumes/mysql
 
 # composer
 app/vendor
+
+# phpstan
+.phpstan_result
+.phpstan_cache
